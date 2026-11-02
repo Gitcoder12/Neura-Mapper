@@ -1,26 +1,28 @@
 import heapq
-import math
 
 class NeuroMapper:
     def __init__(self, grid_size=(10, 10, 10)):
-        self.grid = {}
         self.grid_size = grid_size
-        self.critical_regions = set()
+        # Classifier dictionary: 0=Safe, 1=Warning, 2=Critical
+        self.zones = {} 
 
-    def add_critical_region(self, coord):
-        """Marks a voxel as high-risk (e.g., a tumor or vital area)."""
-        self.critical_regions.add(coord)
+    def classify_region(self, coord, classification):
+        """
+        Classify a voxel: 
+        0 = Safe (Green), 1 = Warning (Yellow), 2 = Critical (Red)
+        """
+        self.zones[coord] = classification
 
     def is_valid(self, coord):
         x, y, z = coord
         if not (0 <= x < self.grid_size[0] and 0 <= y < self.grid_size[1] and 0 <= z < self.grid_size[2]):
             return False
-        if coord in self.critical_regions:
+        # If the zone is Critical (2), it's impassable
+        if self.zones.get(coord, 0) == 2:
             return False
         return True
 
     def get_neighbors(self, coord):
-        """Gets 6-directional neighbors in 3D space."""
         directions = [(1,0,0), (-1,0,0), (0,1,0), (0,-1,0), (0,0,1), (0,0,-1)]
         neighbors = []
         for dx, dy, dz in directions:
@@ -30,11 +32,9 @@ class NeuroMapper:
         return neighbors
 
     def find_safest_path(self, start, end):
-        """Dijkstra's algorithm to find the safest (shortest) path."""
-        if start in self.critical_regions or end in self.critical_regions:
+        if not self.is_valid(start) or not self.is_valid(end):
             return None
 
-        # Priority queue: (cost, current_coord, path)
         queue = [(0, start, [start])]
         visited = set()
 
@@ -48,23 +48,8 @@ class NeuroMapper:
 
             for neighbor in self.get_neighbors(current):
                 if neighbor not in visited:
-                    new_cost = cost + 1  # Uniform cost for simplicity
+                    # If it's a Warning zone (1), add a heavy penalty to the cost
+                    penalty = 10 if self.zones.get(neighbor, 0) == 1 else 1
+                    new_cost = cost + penalty
                     heapq.heappush(queue, (new_cost, neighbor, path + [neighbor]))
         return None
-
-# --- Example Usage ---
-if __name__ == "__main__":
-    mapper = NeuroMapper(grid_size=(5, 5, 5))
-    
-    # Add some critical (high-risk) regions in the middle
-    for x in range(1, 4):
-        for y in range(1, 4):
-            mapper.add_critical_region((x, y, 2))
-
-    start = (0, 0, 0)
-    end = (4, 4, 4)
-    
-    safest_path = mapper.find_safest_path(start, end)
-    print(f"Start: {start}, End: {end}")
-    print(f"Critical Regions Blocked (Layer Z=2): {(1,1,2), (2,2,2), (3,3,2)}")
-    print(f"Path found: {safest_path}")
