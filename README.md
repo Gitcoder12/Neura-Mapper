@@ -1,25 +1,16 @@
 # Neura-Mapper
-3D Spatial Optimization and Diagnostic Routing Engine for Computer Assisted Neurosurgery.
+3D Spatial Optimization and Diagnostic Routing Engine for Computer Assisted Neurosurgery. 
+
 
 ---
 
-## Project handbook
+## AI-maintained project notes (secondary — 2026-11-13)
 
-- [Activity log](ACTIVITY_LOG.md) · [Feature upgrade plan](FEATURE_UPGRADE_PLAN.md)
-- [Company and team fit](COMPANY_FIT.md) · [README explanation draft](README_ADDENDUM_DRAFT.md)
-- [README quality checklist](README_QUALITY_CHECKLIST.md)
-- [Contributing](CONTRIBUTING.md) · [Agent instructions](AGENTS.md) · [Agent skills](SKILLS.md)
+This section supplements the maintainer-authored README above; it does not replace or certify the original claims.
 
-## Understanding the project
-
-### In plain language
-
-A simple 3D grid pathfinder that finds a route through cells labelled as open, risky or blocked.
-
-### Technical and research view
-
-Current implementation is a small in-memory 3D grid pathfinder with manually assigned safe/warning/critical voxels. It has no medical-image ingestion, anatomical registration, clinical validation, uncertainty model or clinical workflow integration. The repository must be described as an educational/research prototype, not a neurosurgical navigation system.
-
-Document grid indexing, dimensions, neighborhood connectivity, cost model, path search algorithm, validation and output structure. Include a small example with a known expected route.
-
-For future work, see [FEATURE_UPGRADE_PLAN.md](FEATURE_UPGRADE_PLAN.md), [ACTIVITY_LOG.md](ACTIVITY_LOG.md), [COMPANY_FIT.md](COMPANY_FIT.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
+- The current source tree, actual data and executed tests are the implementation source of truth. Roadmap items and draft PRs are not shipped capabilities.
+- Preserve real/user-provided data and source provenance. Never replace it with fabricated or synthetic runtime records; isolate and label fixtures.
+- Document units, coordinate frames, source, licence, collection date, assumptions, seeds and validation methods where applicable.
+- Mark unverifiable fields and metrics as unknown/unverified. Do not invent clinical, scientific or official claims.
+- Verify installation, execution and tests against the exact current commit before public use.
+- See [MODEL_AUDIT_ROUTER.md](MODEL_AUDIT_ROUTER.md) for independent review instructions.
