@@ -47,12 +47,12 @@ def test_neuro_mapper_avoids_critical_voxels():
 def test_astar_avoids_critical_voxels_and_warning_penalty():
     router = AStarRouter((3, 3, 1))
     router.classify_region((1, 0, 0), 2)
-    router.classify_region((0, 1, 0), 1)
+    router.classify_region((1, 1, 0), 1)
     path = router.find_path((0, 0, 0), (2, 0, 0))
 
     assert path
     assert (1, 0, 0) not in path
-    assert (0, 1, 0) not in path
+    assert (1, 1, 0) not in path
 
 
 def test_router_rejects_invalid_grid_dimensions():
