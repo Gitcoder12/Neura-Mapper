@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Neura-Mapper BCI research session metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "session_id",
+    "participant_pseudonym",
+    "authorization_scope",
+    "source",
+    "coordinate_frame",
+    "coordinate_units",
+    "channels"
+  ],
+  "properties": {
+    "session_id": {"type":"string","minLength":1},
+    "participant_pseudonym": {"type":"string","minLength":1},
+    "authorization_scope": {"type":"string","minLength":1},
+    "study_reference": {"type":"string"},
+    "source": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["dataset_id","accessed_at","data_location"],
+      "properties":{
+        "dataset_id":{"type":"string","minLength":1},
+        "accessed_at":{"type":"string","format":"date-time"},
+        "data_location":{"type":"string","minLength":1},
+        "export_version":{"type":"string"}
+      }
+    },
+    "coordinate_frame": {"type":"string","minLength":1},
+    "coordinate_units": {"type":"string","enum":["mm","cm","m"]},
+    "channels": {
+      "type":"array",
+      "items":{
+        "type":"object",
+        "additionalProperties":false,
+        "required":["channel_id","position_xyz","signal_quality_status"],
+        "properties":{
+          "channel_id":{"type":"string","minLength":1},
+          "position_xyz":{
+            "type":"array",
+            "items":{"type":"number"},
+            "minItems":3,
+            "maxItems":3
+          },
+          "anatomical_label":{"type":"string"},
+          "signal_quality_status":{"type":"string","enum":["good","degraded","missing","artifact","unknown"]},
+          "sample_rate_hz":{"type":"number","exclusiveMinimum":0},
+          "modality":{"type":"string"}
+        }
+      }
+    },
+    "events": {
+      "type":"array",
+      "items":{
+        "type":"object",
+        "required":["time_seconds","label"],
+        "properties":{
+          "time_seconds":{"type":"number","minimum":0},
+          "label":{"type":"string","minLength":1}
+        }
+      }
+    }
+  }
+}
