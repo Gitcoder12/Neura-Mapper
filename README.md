@@ -33,3 +33,22 @@ This section supplements the maintainer-authored README above; it does not repla
 3. Keep the project labelled as a simulation/prototype until independently validated in a controlled robotics environment.
 
 **Verification status:** static source inspection only; pathfinding tests and physical-system integration remain unverified.
+
+
+---
+
+## Branch Activity & Development History
+
+**Audit date:** 2026-11-18 · **Comparison base:** `main`
+
+| Branch | Difference from `main` | Observed work / changed paths |
+|---|---:|---|
+| `docs/portfolio-operating-kit-2026-11-13` | 0 ahead / 5 behind | No unique commits relative to current `main`; branch is behind |
+| `docs/project-status-2026-11-16-neura-mapper` | 1 / 7 | Project status snapshot: `PROJECT_STATUS.md` |
+| `feat/neural-data-mapper` | 7 / 1 | BCI research mapping docs, session schema, neural router/pathfinder changes, CI and spatial-mapping tests |
+
+### Open pull requests observed during this audit
+
+- [PR #3 — project status snapshot](https://github.com/Gitcoder12/Neura-Mapper/pull/3)
+
+**Review note:** The neural data mapper branch changes routing/mapping logic and adds tests. Run those tests and inspect schema compatibility on the exact PR head before merging. No branches have been merged or deleted by this documentation update.
