@@ -33,3 +33,10 @@ This section supplements the maintainer-authored README above; it does not repla
 3. Keep the project labelled as a simulation/prototype until independently validated in a controlled robotics environment.
 
 **Verification status:** static source inspection only; pathfinding tests and physical-system integration remain unverified.
+
+---
+
+## Examples Used
+- Finding a low-cost path through a 3D anatomical grid
+- Routing around regions marked as obstacles
+- Comparing alternative paths in a simulated surgical-planning environment
