@@ -2,6 +2,38 @@
 3D Spatial Optimization and Diagnostic Routing Engine for Computer Assisted Neurosurgery. 
 
 
+## Run the 3D routing demo locally
+
+Neura-Mapper is a local Python simulation, not a hosted website or a clinically validated surgical-planning system.
+
+```bash
+git clone https://github.com/Gitcoder12/Neura-Mapper.git
+cd Neura-Mapper
+python -m venv .venv
+```
+
+Activate the environment:
+
+```powershell
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+```
+
+```bash
+# macOS / Linux
+source .venv/bin/activate
+```
+
+Install the plotting dependency and run the demo:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install matplotlib
+python visualize.py
+```
+
+The script opens a Matplotlib 3D plot. Close the plot window to finish. Its grid and zones are illustrative simulation data, not medical guidance or physical robot validation.
+
 ---
 
 ## AI-maintained project notes (secondary — 2026-11-13)
